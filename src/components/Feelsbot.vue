@@ -8,7 +8,6 @@
 
 <script>
 export default {
-  el: app,
   name: 'Feelsbot',
   data () {
     return {
@@ -29,11 +28,9 @@ html, body {
 }
 
 #app {
-  display: flex;
   height: 100%;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
 #app input {
