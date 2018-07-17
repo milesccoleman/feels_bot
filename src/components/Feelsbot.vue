@@ -31,6 +31,7 @@ html, body {
   height: 100%;
   justify-content: center;
   align-items: center;
+  margin-top: -10px;
 }
 
 #app input {
@@ -39,6 +40,7 @@ html, body {
   border: 0;
   border-radius: 3px;
   background: #fff;
+  margin-top: 200px;
 }
 
 h1 {
