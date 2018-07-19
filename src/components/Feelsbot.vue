@@ -1,14 +1,14 @@
 <template>
   <div id="app" v-bind:style="{backgroundColor: color}">
-      <div class="color">
-      <form v-on:submit.prevent="play">
-      <input type="text" v-bind:style="{color: color}" v-model="color" placeholder="enter a color"/>
-      <audio controls>
-        <source v-bind:src='sound'>
-      </audio>
+    <div class="color">
+      <form v-on:submit="play">
+        <input type="text" v-bind:style="{color: color}" v-model="color" placeholder="enter a color"/>
+        <audio ref="colorSound">
+          <source v-bind:src='sound'>
+        </audio>
       </form>
-      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -22,7 +22,14 @@ export default {
   },
   methods: {
     play: function () {
-      this.sound = 'static/angrysound.mp3'
+      if (this.color === 'red') {
+        this.sound = 'static/angrysound.mp3'
+        this.$refs.colorSound.play()
+      }
+      if (this.color === 'blue') {
+        this.sound = 'static/happysound.mp3'
+        this.$refs.colorSound.play()
+      }
     }
   }
 }
