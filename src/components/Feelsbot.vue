@@ -1,8 +1,8 @@
 <template>
   <div id="app" v-bind:style="{backgroundColor: color}">
     <div class="color">
-      <form v-on:submit="play">
-        <input type="text" v-bind:style="{color: color}" v-model="color" placeholder="enter a color"/>
+      <form v-on:submit.prevent="eventPlay">
+        <input type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="enter a color"/>
         <audio ref="colorSound">
           <source v-bind:src='sound'>
         </audio>
@@ -17,17 +17,20 @@ export default {
   data () {
     return {
       color: '',
-      sound: ''
+      sound: '',
+      emotion: ''
     }
   },
   methods: {
-    play: function () {
-      if (this.color === 'red') {
+    eventPlay: function () {
+      if (this.emotion === 'angry') {
         this.sound = 'static/angrysound.mp3'
+        this.color = 'orange'
         this.$refs.colorSound.play()
       }
-      if (this.color === 'blue') {
+      if (this.emotion === 'happy') {
         this.sound = 'static/happysound.mp3'
+        this.color = 'teal'
         this.$refs.colorSound.play()
       }
     }
