@@ -1,10 +1,22 @@
 <template>
   <div id="app" v-bind:style="{backgroundColor: color}">
     <div class="color">
-      <form v-on:submit.prevent="eventPlay">
-        <input type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="enter a color"/>
-        <audio ref="colorSound">
-          <source v-bind:src='sound'>
+      <form v-on:keyup.enter.prevent="eventPlay">
+        <input type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
+        <audio ref="colorSoundAngry">
+          <source src='static/angrysound.mp3'>
+        </audio>
+        <audio ref="colorSoundHappy">
+          <source src='static/happysound.mp3'>
+        </audio>
+        <audio ref="colorSoundSad">
+          <source src='static/sadsound.mp3'>
+        </audio>
+        <audio ref="colorSoundFearful">
+          <source src='static/fearfulsound.mp3'>
+        </audio>
+        <audio ref="colorSoundDisgusted">
+          <source src='static/disgustedsound.mp3'>
         </audio>
       </form>
     </div>
@@ -17,21 +29,30 @@ export default {
   data () {
     return {
       color: '',
-      sound: '',
       emotion: ''
     }
   },
   methods: {
     eventPlay: function () {
       if (this.emotion === 'angry') {
-        this.sound = 'static/angrysound.mp3'
-        this.color = 'orange'
-        this.$refs.colorSound.play()
+        this.color = 'red'
+        this.$refs.colorSoundAngry.play()
       }
       if (this.emotion === 'happy') {
-        this.sound = 'static/happysound.mp3'
-        this.color = 'teal'
-        this.$refs.colorSound.play()
+        this.color = 'lightblue'
+        this.$refs.colorSoundHappy.play()
+      }
+      if (this.emotion === 'sad') {
+        this.color = 'purple'
+        this.$refs.colorSoundSad.play()
+      }
+      if (this.emotion === 'fearful') {
+        this.color = 'yellow'
+        this.$refs.colorSoundFearful.play()
+      }
+      if (this.emotion === 'disgusted') {
+        this.color = 'brown'
+        this.$refs.colorSoundDisgusted.play()
       }
     }
   }
