@@ -6,13 +6,13 @@
       <div class="emotion" id="happy" v-bind:style="{backgroundColor: happy}"></div><br><br><br><br>
 
     <form v-on:keyup.enter.prevent="eventPlay">
-    <div id="output" class="fakeScreen"><p class="line1">{{msg}}<span class="cursor1">_</span></p><span class="cursor4"></span></div>
-    <input type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
-      <audio ref="colorSoundAngry"><source src='static/angrysound.mp3'></audio>
-      <audio ref="colorSoundHappy"><source src='static/happysound.mp3'></audio>
-      <audio ref="colorSoundSad"><source src='static/sadsound.mp3'></audio>
-      <audio ref="colorSoundFearful"><source src='static/fearfulsound.mp3'></audio>
-      <audio ref="colorSoundDisgusted"><source src='static/disgustedsound.mp3'></audio>
+      <div id="output" class="fakeScreen"><p class="line1">{{msg}}<span class="cursor1">_</span></p></div>
+        <input type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
+          <audio ref="colorSoundAngry"><source src='static/angrysound.mp3'></audio>
+          <audio ref="colorSoundHappy"><source src='static/happysound.mp3'></audio>
+          <audio ref="colorSoundSad"><source src='static/sadsound.mp3'></audio>
+          <audio ref="colorSoundFearful"><source src='static/fearfulsound.mp3'></audio>
+          <audio ref="colorSoundDisgusted"><source src='static/disgustedsound.mp3'></audio>
     </form>
       <div class="emotion" id="sad" v-bind:style="{backgroundColor: sad}"></div><br><br>
       <div class="emotion" id="fearful" v-bind:style="{backgroundColor: fearful}"></div><br><br>
@@ -71,7 +71,6 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 @import url("https://fonts.googleapis.com/css?family=Proza+Libre|Fira+Mono");
-
 .fakeScreen {
   background-color: #151515;
   box-sizing: border-box;
@@ -82,9 +81,7 @@ export default {
   border-bottom-right-radius: 5px;
   margin-top: -260px;
   margin-bottom: 25px;
-
 }
-
 p {
   position: relative;
   left: 50%;
@@ -96,12 +93,10 @@ p {
   overflow: hidden;
   width: 0;
 }
-
 span {
   color: #fff;
   font-weight: bold;
 }
-
 .line1 {
   color: #9CD9F0;
   -webkit-animation: type .5s 1s steps(20, end) forwards;
@@ -109,59 +104,18 @@ span {
   -o-animation: type .5s 1s steps(20, end) forwards;
   animation: type .5s 1s steps(20, end) forwards;
 }
-
+@-webkit-keyframes type {
+  to {
+    width: 17em;
+  }
+}
 .cursor1 {
   -webkit-animation: blink 1s 2s 2 forwards;
   -moz-animation: blink 1s 2s 2 forwards;
   -o-animation: blink 1s 2s 2 forwards;
   animation: blink 1s 2s 2 forwards;
+  -webkit-animation-iteration-count: infinite;
 }
-
-.line2 {
-  color: #CDEE69;
-  -webkit-animation: type .5s 4.25s steps(20, end) forwards;
-  -moz-animation: type .5s 4.25s steps(20, end) forwards;
-  -o-animation: type .5s 4.25s steps(20, end) forwards;
-  animation: type .5s 4.25s steps(20, end) forwards;
-}
-
-.cursor2 {
-  -webkit-animation: blink 1s 5.25s 2 forwards;
-  -moz-animation: blink 1s 5.25s 2 forwards;
-  -o-animation: blink 1s 5.25s 2 forwards;
-  animation: blink 1s 5.25s 2 forwards;
-}
-
-.line3 {
-  color: #E09690;
-  -webkit-animation: type .5s 7.5s steps(20, end) forwards;
-  -moz-animation: type .5s 7.5s steps(20, end) forwards;
-  -o-animation: type .5s 7.5s steps(20, end) forwards;
-  animation: type .5s 7.5s steps(20, end) forwards;
-}
-
-.cursor3 {
-  -webkit-animation: blink 1s 8.5s 2 forwards;
-  -moz-animation: blink 1s 8.5s 2 forwards;
-  -o-animation: blink 1s 8.5s 2 forwards;
-  animation: blink 1s 8.5s 2 forwards;
-}
-
-.line4 {
-  color: #fff;
-  -webkit-animation: type .5s 10.75s steps(20, end) forwards;
-  -moz-animation: type .5s 10.75s steps(20, end) forwards;
-  -o-animation: type .5s 10.75s steps(20, end) forwards;
-  animation: type .5s 10.75s steps(20, end) forwards;
-}
-
-.cursor4 {
-  -webkit-animation: blink 1s 11.5s infinite;
-  -moz-animation: blink 1s 8.5s infinite;
-  -o-animation: blink 1s 8.5s infinite;
-  animation: blink 1s 8.5s infinite;
-}
-
 @-webkit-keyframes blink {
   0% {
     opacity: 0;
@@ -179,84 +133,6 @@ span {
     opacity: 0;
   }
 }
-
-@-moz-keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@-o-keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes blink {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes type {
-  to {
-    width: 17em;
-  }
-}
-
-@-moz-keyframes type {
-  to {
-    width: 17em;
-  }
-}
-
-@-o-keyframes type {
-  to {
-    width: 17em;
-  }
-}
-
-@keyframes type {
-  to {
-    width: 17em;
-  }
-}
 html {
   margin: 0;
   padding: 0;
@@ -270,22 +146,17 @@ emotions {
   z-index: -1;
   margin-top: 300px;
 }
-@-webkit-keyframes angerPulse {
-  from {-webkit-box-shadow: 0 0 9px red; }
-  50% {-webkit-box-shadow: 0 0 36px red; }
-  to {-webkit-box-shadow: 0 0 9px red; }
-}
 #angry {
   height: 125px;
   z-index: -1;
   -webkit-animation-name: angerPulse;
   -webkit-animation-duration: 3s;
   -webkit-animation-iteration-count: infinite;
-}
-@-webkit-keyframes happyPulse {
-  from {-webkit-box-shadow: 0 0 9px blue; }
-  50% {-webkit-box-shadow: 0 0 36px blue; }
-  to {-webkit-box-shadow: 0 0 9px blue; }
+  }
+@-webkit-keyframes angerPulse {
+  from {-webkit-box-shadow: 0 0 9px red; }
+  50% {-webkit-box-shadow: 0 0 36px red; }
+  to {-webkit-box-shadow: 0 0 9px red; }
 }
 #happy {
   height: 125px;
@@ -294,10 +165,10 @@ emotions {
   -webkit-animation-duration: 1.5s;
   -webkit-animation-iteration-count: infinite;
 }
-@-webkit-keyframes sadPulse {
-  from {-webkit-box-shadow: 0 0 9px purple; }
-  50% {-webkit-box-shadow: 0 0 36px purple; }
-  to {-webkit-box-shadow: 0 0 9px purple; }
+@-webkit-keyframes happyPulse {
+  from {-webkit-box-shadow: 0 0 9px blue; }
+  50% {-webkit-box-shadow: 0 0 36px blue; }
+  to {-webkit-box-shadow: 0 0 9px blue; }
 }
 #sad {
   height: 125px;
@@ -306,10 +177,10 @@ emotions {
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
-@-webkit-keyframes fearfulPulse {
-  from {-webkit-box-shadow: 0 0 9px yellow; }
-  50% {-webkit-box-shadow: 0 0 36px yellow; }
-  to {-webkit-box-shadow: 0 0 9px yellow; }
+@-webkit-keyframes sadPulse {
+  from {-webkit-box-shadow: 0 0 9px purple; }
+  50% {-webkit-box-shadow: 0 0 36px purple; }
+  to {-webkit-box-shadow: 0 0 9px purple; }
 }
 #fearful {
   height: 125px;
@@ -318,10 +189,10 @@ emotions {
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
-@-webkit-keyframes disgustedPulse {
-  from {-webkit-box-shadow: 0 0 9px teal; }
-  50% {-webkit-box-shadow: 0 0 36px teal; }
-  to {-webkit-box-shadow: 0 0 9px teal; }
+@-webkit-keyframes fearfulPulse {
+  from {-webkit-box-shadow: 0 0 9px yellow; }
+  50% {-webkit-box-shadow: 0 0 36px yellow; }
+  to {-webkit-box-shadow: 0 0 9px yellow; }
 }
 #disgusted {
   height: 100px;
@@ -329,6 +200,11 @@ emotions {
   -webkit-animation-name: disgustedPulse;
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
+}
+@-webkit-keyframes disgustedPulse {
+  from {-webkit-box-shadow: 0 0 9px teal; }
+  50% {-webkit-box-shadow: 0 0 36px teal; }
+  to {-webkit-box-shadow: 0 0 9px teal; }
 }
 input {
   padding: 1rem 1rem;
