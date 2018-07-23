@@ -97,24 +97,17 @@ span {
   color: #fff;
   font-weight: bold;
 }
+@-webkit-keyframes type {
+  to {
+    width: 17em;
+  }
+}
 .line1 {
   color: #9CD9F0;
   -webkit-animation: type .5s 1s steps(20, end) forwards;
   -moz-animation: type .5s 1s steps(20, end) forwards;
   -o-animation: type .5s 1s steps(20, end) forwards;
   animation: type .5s 1s steps(20, end) forwards;
-}
-@-webkit-keyframes type {
-  to {
-    width: 17em;
-  }
-}
-.cursor1 {
-  -webkit-animation: blink 1s 2s 2 forwards;
-  -moz-animation: blink 1s 2s 2 forwards;
-  -o-animation: blink 1s 2s 2 forwards;
-  animation: blink 1s 2s 2 forwards;
-  -webkit-animation-iteration-count: infinite;
 }
 @-webkit-keyframes blink {
   0% {
@@ -133,6 +126,13 @@ span {
     opacity: 0;
   }
 }
+.cursor1 {
+  -webkit-animation: blink 1s 2s 2 forwards;
+  -moz-animation: blink 1s 2s 2 forwards;
+  -o-animation: blink 1s 2s 2 forwards;
+  animation: blink 1s 2s 2 forwards;
+  -webkit-animation-iteration-count: infinite;
+}
 html {
   margin: 0;
   padding: 0;
@@ -146,6 +146,11 @@ emotions {
   z-index: -1;
   margin-top: 300px;
 }
+@-webkit-keyframes angerPulse {
+  from {-webkit-box-shadow: 0 0 9px red; }
+  50% {-webkit-box-shadow: 0 0 36px red; }
+  to {-webkit-box-shadow: 0 0 9px red; }
+}
 #angry {
   height: 125px;
   z-index: -1;
@@ -153,10 +158,10 @@ emotions {
   -webkit-animation-duration: 3s;
   -webkit-animation-iteration-count: infinite;
   }
-@-webkit-keyframes angerPulse {
-  from {-webkit-box-shadow: 0 0 9px red; }
-  50% {-webkit-box-shadow: 0 0 36px red; }
-  to {-webkit-box-shadow: 0 0 9px red; }
+@-webkit-keyframes happyPulse {
+  from {-webkit-box-shadow: 0 0 9px blue; }
+  50% {-webkit-box-shadow: 0 0 36px blue; }
+  to {-webkit-box-shadow: 0 0 9px blue; }
 }
 #happy {
   height: 125px;
@@ -165,10 +170,10 @@ emotions {
   -webkit-animation-duration: 1.5s;
   -webkit-animation-iteration-count: infinite;
 }
-@-webkit-keyframes happyPulse {
-  from {-webkit-box-shadow: 0 0 9px blue; }
-  50% {-webkit-box-shadow: 0 0 36px blue; }
-  to {-webkit-box-shadow: 0 0 9px blue; }
+@-webkit-keyframes sadPulse {
+  from {-webkit-box-shadow: 0 0 9px purple; }
+  50% {-webkit-box-shadow: 0 0 36px purple; }
+  to {-webkit-box-shadow: 0 0 9px purple; }
 }
 #sad {
   height: 125px;
@@ -177,10 +182,10 @@ emotions {
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
-@-webkit-keyframes sadPulse {
-  from {-webkit-box-shadow: 0 0 9px purple; }
-  50% {-webkit-box-shadow: 0 0 36px purple; }
-  to {-webkit-box-shadow: 0 0 9px purple; }
+@-webkit-keyframes fearfulPulse {
+  from {-webkit-box-shadow: 0 0 9px yellow; }
+  50% {-webkit-box-shadow: 0 0 36px yellow; }
+  to {-webkit-box-shadow: 0 0 9px yellow; }
 }
 #fearful {
   height: 125px;
@@ -189,10 +194,10 @@ emotions {
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
-@-webkit-keyframes fearfulPulse {
-  from {-webkit-box-shadow: 0 0 9px yellow; }
-  50% {-webkit-box-shadow: 0 0 36px yellow; }
-  to {-webkit-box-shadow: 0 0 9px yellow; }
+@-webkit-keyframes disgustedPulse {
+  from {-webkit-box-shadow: 0 0 9px teal; }
+  50% {-webkit-box-shadow: 0 0 36px teal; }
+  to {-webkit-box-shadow: 0 0 9px teal; }
 }
 #disgusted {
   height: 100px;
@@ -200,11 +205,6 @@ emotions {
   -webkit-animation-name: disgustedPulse;
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
-}
-@-webkit-keyframes disgustedPulse {
-  from {-webkit-box-shadow: 0 0 9px teal; }
-  50% {-webkit-box-shadow: 0 0 36px teal; }
-  to {-webkit-box-shadow: 0 0 9px teal; }
 }
 input {
   padding: 1rem 1rem;
