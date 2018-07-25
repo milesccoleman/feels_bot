@@ -62,8 +62,21 @@ export default {
         this.disgusted = '#f2ae04'
         this.$refs.colorSoundDisgusted.play()
         this.msg = 'that makes me feel disgusted'
+        setTimeout(()=>{this.refresh(); }, 5000)
       }
-    }
+    },
+    refresh: function () {
+      if (this.msg != null)
+        this.color = '',
+        this.emotion = '',
+        this.angry = '',
+        this.happy = '',
+        this.sad = '',
+        this.fearful = '',
+        this.disgusted = '',
+        this.msg = '$  tell me something else. i like feelings',
+        this.$refs.colorSoundDisgusted.pause()
+  }
   }
 }
 </script>
