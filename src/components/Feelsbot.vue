@@ -42,21 +42,25 @@ export default {
         this.angry = '#ff3f3f'
         this.$refs.colorSoundAngry.play()
         this.msg = 'that makes me feel angry'
+        setTimeout(() => { this.refresh() }, 5000)
       }
       if (this.emotion === 'happy') {
         this.happy = '#2bd1fc'
         this.$refs.colorSoundHappy.play()
         this.msg = 'that makes me feel happy'
+        setTimeout(() => { this.refresh() }, 5000)
       }
       if (this.emotion === 'sad') {
         this.sad = '#c04df9'
         this.$refs.colorSoundSad.play()
         this.msg = 'that makes me feel sad'
+        setTimeout(() => { this.refresh() }, 5000)
       }
       if (this.emotion === 'fearful') {
         this.fearful = '#f3ea5f'
         this.$refs.colorSoundFearful.play()
         this.msg = 'that makes me feel fearful'
+        setTimeout(() => { this.refresh() }, 5000)
       }
       if (this.emotion === 'disgusted') {
         this.disgusted = '#f2ae04'
