@@ -7,7 +7,7 @@
 
     <form v-on:keyup.enter.prevent="eventPlay">
       <div id="output" class="fakeScreen"><p class="line1">{{msg}}<span class="cursor1">_</span></p></div>
-        <input type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
+        <input v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
           <audio ref="colorSoundAngry"><source src='static/angrysound.mp3'></audio>
           <audio ref="colorSoundHappy"><source src='static/happysound.mp3'></audio>
           <audio ref="colorSoundSad"><source src='static/sadsound.mp3'></audio>
@@ -33,7 +33,8 @@ export default {
       sad: '',
       fearful: '',
       disgusted: '',
-      msg: '$  tell me anything you want, and i\'ll tell you how it makes me feel'
+      msg: '$  tell me anything you want, and i\'ll tell you how it makes me feel',
+      time: 0,
     }
   },
   methods: {
@@ -63,7 +64,7 @@ export default {
         setTimeout(() => { this.refresh() }, 5000)
       }
       if (this.emotion === 'disgusted') {
-        this.disgusted = '#f2ae04'
+        this.disgusted = '#42f459'
         this.$refs.colorSoundDisgusted.play()
         this.msg = 'that makes me feel disgusted'
         setTimeout(() => { this.refresh() }, 5000)
@@ -78,13 +79,34 @@ export default {
         this.sad = '',
         this.fearful = '',
         this.disgusted = '',
-        this.msg = '$  tell me something else. i like feelings',
+        this.msg = '$  tell me something else. i like feelings'
       this.$refs.colorSoundAngry.pause()
       this.$refs.colorSoundHappy.pause()
       this.$refs.colorSoundSad.pause()
       this.$refs.colorSoundFearful.pause()
       this.$refs.colorSoundDisgusted.pause()
       }
+    },
+    refresh2: function () {
+        this.color = '',
+        this.emotion = '',
+        this.angry = '',
+        this.happy = '',
+        this.sad = '',
+        this.fearful = '',
+        this.disgusted = '',
+        this.msg = '$  tell me anything you want, and i\'ll tell you how it makes me feel',
+      this.$refs.colorSoundAngry.pause()
+      this.$refs.colorSoundHappy.pause()
+      this.$refs.colorSoundSad.pause()
+      this.$refs.colorSoundFearful.pause()
+      this.$refs.colorSoundDisgusted.pause()
+      console.log('refresh2')
+    },
+    resetTimer: function () {
+      clearTimeout(this.time)
+      this.time = setTimeout(() => { this.refresh2() }, 5000)
+      console.log('reset timer')
     }
   }
 }
@@ -217,9 +239,9 @@ emotions {
   -webkit-animation-iteration-count: infinite;
 }
 @keyframes disgustedPulse {
-  from {-webkit-box-shadow: 0 0 9px #f2ae04; }
-  50% {-webkit-box-shadow: 0 0 36px #f2ae04; }
-  to {-webkit-box-shadow: 0 0 9px #f2ae04; }
+  from {-webkit-box-shadow: 0 0 9px #42f459; }
+  50% {-webkit-box-shadow: 0 0 36px #42f459; }
+  to {-webkit-box-shadow: 0 0 9px #42f459; }
 }
 #disgusted {
   height: 125px;
