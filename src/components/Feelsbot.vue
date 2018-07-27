@@ -5,24 +5,26 @@
       <div class="emotion" id="angry" v-bind:style="{backgroundColor: angry}"></div><br><br>
       <div class="emotion" id="happy" v-bind:style="{backgroundColor: happy}"></div><br><br><br><br>
 
-    <form v-on:keyup.enter.prevent="eventPlay">
-      <div id="output" class="fakeScreen"><p class="line1">{{msg}}<span class="cursor1">_</span></p></div>
+    <form v-on:submit.prevent="getDataDoStuffWithData">
+      <div id="output" class="fakeScreen"><p class="line1">{{msg}}{{msg1}}{{msg2}}{{msg3}}{{msg4}}{{msg5}}<span class="cursor1">_</span></p></div>
         <input v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
           <audio ref="colorSoundAngry"><source src='static/angrysound.mp3'></audio>
           <audio ref="colorSoundHappy"><source src='static/happysound.mp3'></audio>
           <audio ref="colorSoundSad"><source src='static/sadsound.mp3'></audio>
           <audio ref="colorSoundFearful"><source src='static/fearfulsound.mp3'></audio>
-          <audio ref="colorSoundDisgusted"><source src='static/disgustedsound.mp3'></audio>
+          <audio ref="colorSoundSurprised"><source src='static/surprisedsound.mp3'></audio>
     </form>
       <div class="emotion" id="sad" v-bind:style="{backgroundColor: sad}"></div><br><br>
       <div class="emotion" id="fearful" v-bind:style="{backgroundColor: fearful}"></div><br><br>
-      <div class="emotion" id="disgusted" v-bind:style="{backgroundColor: disgusted}"></div><br><br><br><br>
+      <div class="emotion" id="surprised" v-bind:style="{backgroundColor: surprised}"></div><br><br><br><br>
   </div>
 
 </template>
 
 <script>
-export default {
+import axios from 'axios'
+export default
+{
   name: 'Feelsbot',
   data () {
     return {
@@ -32,76 +34,116 @@ export default {
       happy: '',
       sad: '',
       fearful: '',
-      disgusted: '',
+      surprised: '',
       msg: '$  tell me anything you want, and i\'ll tell you how it makes me feel',
-      time: 0,
+      msg2: '',
+      msg3: '',
+      msg4: '',
+      msg5: '',
+      time: 0
     }
   },
   methods: {
-    eventPlay: function () {
-      if (this.emotion === 'angry') {
-        this.angry = '#ff3f3f'
-        this.$refs.colorSoundAngry.play()
-        this.msg = 'that makes me feel angry'
-        setTimeout(() => { this.refresh() }, 5000)
-      }
-      if (this.emotion === 'happy') {
-        this.happy = '#2bd1fc'
-        this.$refs.colorSoundHappy.play()
-        this.msg = 'that makes me feel happy'
-        setTimeout(() => { this.refresh() }, 5000)
-      }
-      if (this.emotion === 'sad') {
-        this.sad = '#c04df9'
-        this.$refs.colorSoundSad.play()
-        this.msg = 'that makes me feel sad'
-        setTimeout(() => { this.refresh() }, 5000)
-      }
-      if (this.emotion === 'fearful') {
-        this.fearful = '#f3ea5f'
-        this.$refs.colorSoundFearful.play()
-        this.msg = 'that makes me feel fearful'
-        setTimeout(() => { this.refresh() }, 5000)
-      }
-      if (this.emotion === 'disgusted') {
-        this.disgusted = '#42f459'
-        this.$refs.colorSoundDisgusted.play()
-        this.msg = 'that makes me feel disgusted'
-        setTimeout(() => { this.refresh() }, 5000)
-      }
+    getDataDoStuffWithData: function () {
+      var self = this
+      var angrySound = new Audio('static/angrysound.mp3')
+      var happySound = new Audio('static/happysound.mp3')
+      var sadSound = new Audio('static/sadsound.mp3')
+      var fearfulSound = new Audio('static/fearfulsound.mp3')
+      var surprisedSound = new Audio('static/surprisedsound.mp3')
+      axios.post('https://apiv2.indico.io/emotion/', JSON.stringify({
+        'api_key': '74327046b0f275d734b4089b24ec6792',
+        'data': self.emotion,
+        'threshold': 0.1
+      }))
+        .then(function (response) {
+          console.log(response)
+          if (response.data.results.anger &&
+          response.data.results.anger > 0.2) {
+            self.angry = '#ff3f3f'
+            self.msg = ''
+            self.msg1 = ' that makes me feel angry'
+            angrySound.play()
+            setTimeout(() => { self.refresh() }, 5000)
+          }
+          if (response.data.results.joy &&
+          response.data.results.joy > 0.2) {
+            self.happy = '#2bd1fc'
+            self.msg = ''
+            self.msg2 = ' that makes me feel happy'
+            happySound.play()
+            setTimeout(() => { self.refresh() }, 5000)
+          }
+          if (response.data.results.sadness &&
+          response.data.results.sadness > 0.2) {
+            self.sad = '#c04df9'
+            self.msg = ''
+            self.msg3 = ' that makes me feel sad'
+            sadSound.play()
+            setTimeout(() => { self.refresh() }, 5000)
+          }
+          if (response.data.results.fear &&
+          response.data.results.fear > 0.2) {
+            self.fearful = '#f3ea5f'
+            self.msg = ''
+            self.msg4 = ' that makes me feel afraid'
+            fearfulSound.play()
+            setTimeout(() => { self.refresh() }, 5000)
+          }
+          if (response.data.results.surprise &&
+          response.data.results.surprise > 0.2) {
+            self.surprised = '#42f459'
+            self.msg = ''
+            self.msg5 = ' that makes me feel surprised'
+            surprisedSound.play()
+            setTimeout(() => { self.refresh() }, 5000)
+          }
+        })
+        .catch(function (error) {
+          console.log(error)
+        })
     },
     refresh: function () {
-      if (this.msg != null) {
-        this.color = '',
-        this.emotion = '',
-        this.angry = '',
-        this.happy = '',
-        this.sad = '',
-        this.fearful = '',
-        this.disgusted = '',
-        this.msg = '$  tell me something else. i like feelings'
-      this.$refs.colorSoundAngry.pause()
-      this.$refs.colorSoundHappy.pause()
-      this.$refs.colorSoundSad.pause()
-      this.$refs.colorSoundFearful.pause()
-      this.$refs.colorSoundDisgusted.pause()
-      }
+      this.color = '',
+      this.emotion = '',
+      this.angry = '',
+      this.happy = '',
+      this.sad = '',
+      this.fearful = '',
+      this.surprised = '',
+      this.msg = '$  tell me something else. i like feelings'
+      this.msg1 = '',
+      this.msg2 = '',
+      this.msg3 = '',
+      this.msg4 = '',
+      this.msg5 = '',
+      this.angrySound.pause()
+      this.happySound.pause()
+      this.sadSound.pause()
+      this.fearfulSound.pause()
+      this.surprisedSound.pause()
+      console.log('refresh')
     },
     refresh2: function () {
-        this.color = '',
-        this.emotion = '',
-        this.angry = '',
-        this.happy = '',
-        this.sad = '',
-        this.fearful = '',
-        this.disgusted = '',
-        this.msg = '$  tell me anything you want, and i\'ll tell you how it makes me feel',
-      this.$refs.colorSoundAngry.pause()
-      this.$refs.colorSoundHappy.pause()
-      this.$refs.colorSoundSad.pause()
-      this.$refs.colorSoundFearful.pause()
-      this.$refs.colorSoundDisgusted.pause()
-      console.log('refresh2')
+      this.color = '',
+      this.emotion = '',
+      this.angry = '',
+      this.happy = '',
+      this.sad = '',
+      this.fearful = '',
+      this.surprised = '',
+      this.msg = '$  tell me anything you want, and i\'ll tell you how it makes me feel',
+      this.msg1 = '',
+      this.msg2 = '',
+      this.msg3 = '',
+      this.msg4 = '',
+      this.msg5 = '',
+      this.angrySound.pause()
+      this.happySound.pause()
+      this.sadSound.pause()
+      this.fearfulSound.pause()
+      this.surprisedSound.pause()
+      this.console.log('refresh2')
     },
     resetTimer: function () {
       clearTimeout(this.time)
@@ -238,15 +280,15 @@ emotions {
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
-@keyframes disgustedPulse {
+@keyframes surprisedPulse {
   from {-webkit-box-shadow: 0 0 9px #42f459; }
   50% {-webkit-box-shadow: 0 0 36px #42f459; }
   to {-webkit-box-shadow: 0 0 9px #42f459; }
 }
-#disgusted {
+#surprised {
   height: 125px;
   z-index: -1;
-  -webkit-animation-name: disgustedPulse;
+  -webkit-animation-name: surprisedPulse;
   -webkit-animation-duration: 2s;
   -webkit-animation-iteration-count: infinite;
 }
