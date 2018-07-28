@@ -1,22 +1,25 @@
 <template>
 
-  <div id="emotions">
-
+  <div id="emotions" vbind:src>
+  <img v-if ='gifSrc != null' id="gif" v-bind:src="gifSrc"/>
       <div class="emotion" id="angry" v-bind:style="{backgroundColor: angry}"></div><br><br>
       <div class="emotion" id="happy" v-bind:style="{backgroundColor: happy}"></div><br><br><br><br>
 
     <form v-on:submit.prevent="getDataDoStuffWithData">
       <div id="output" class="fakeScreen"><p class="line1">{{msg}}{{msg1}}{{msg2}}{{msg3}}{{msg4}}{{msg5}}<span class="cursor1">_</span></p></div>
-        <input v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
+        <input id="textWindow" v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
+
           <audio ref="colorSoundAngry"><source src='static/angrysound.mp3'></audio>
           <audio ref="colorSoundHappy"><source src='static/happysound.mp3'></audio>
           <audio ref="colorSoundSad"><source src='static/sadsound.mp3'></audio>
           <audio ref="colorSoundFearful"><source src='static/fearfulsound.mp3'></audio>
           <audio ref="colorSoundSurprised"><source src='static/surprisedsound.mp3'></audio>
     </form>
+
       <div class="emotion" id="sad" v-bind:style="{backgroundColor: sad}"></div><br><br>
       <div class="emotion" id="fearful" v-bind:style="{backgroundColor: fearful}"></div><br><br>
       <div class="emotion" id="surprised" v-bind:style="{backgroundColor: surprised}"></div><br><br><br><br>
+
   </div>
 
 </template>
@@ -36,11 +39,16 @@ export default
       fearful: '',
       surprised: '',
       msg: '$  tell me anything you want, and i\'ll tell you how it makes me feel',
+      msg1: '',
       msg2: '',
       msg3: '',
       msg4: '',
       msg5: '',
-      time: 0
+      time: 0,
+      gif: [],
+      gifSrc: null,
+      output: 0,
+      radomizer: ''
     }
   },
   methods: {
@@ -59,48 +67,62 @@ export default
         .then(function (response) {
           console.log(response)
           if (response.data.results.anger &&
-          response.data.results.anger > 0.2) {
+          response.data.results.anger >= 0.2) {
             self.angry = '#ff3f3f'
             self.msg = ''
-            self.msg1 = ' that makes me feel angry'
+            self.msg1 = '$ that makes me feel angry'
+            self.randomizer = 'angry'
+            self.getGif()
             angrySound.play()
+            self.output = 1
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.joy &&
-          response.data.results.joy > 0.2) {
+          response.data.results.joy >= 0.2) {
             self.happy = '#2bd1fc'
             self.msg = ''
-            self.msg2 = ' that makes me feel happy'
+            self.msg2 = '$  that makes me feel happy'
+            self.randomizer = 'happy'
+            self.getGif()
             happySound.play()
+            self.output = 1
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.sadness &&
-          response.data.results.sadness > 0.2) {
+          response.data.results.sadness >= 0.2) {
             self.sad = '#c04df9'
             self.msg = ''
-            self.msg3 = ' that makes me feel sad'
+            self.msg3 = '$  that makes me feel sad'
+            self.randomizer = 'sad'
+            self.getGif()
             sadSound.play()
+            self.output = 1
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.fear &&
-          response.data.results.fear > 0.2) {
+          response.data.results.fear >= 0.2) {
             self.fearful = '#f3ea5f'
             self.msg = ''
-            self.msg4 = ' that makes me feel afraid'
+            self.msg4 = '$  that makes me feel afraid'
+            self.randomizer = 'afraid'
+            self.getGif()
             fearfulSound.play()
+            self.output = 1
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.surprise &&
-          response.data.results.surprise > 0.2) {
+          response.data.results.surprise >= 0.2) {
             self.surprised = '#42f459'
             self.msg = ''
-            self.msg5 = ' that makes me feel surprised'
+            self.msg5 = '$  that makes me feel surprised'
+            self.randomizer = 'surprised'
+            self.getGif()
             surprisedSound.play()
+            self.output = 1
             setTimeout(() => { self.refresh() }, 5000)
+          } if (self.output === 0) {
+            self.msg = '$  I\'m sorry, i don\'t understand try saying it a different way'
           }
-        })
-        .catch(function (error) {
-          console.log(error)
         })
     },
     refresh: function () {
@@ -117,6 +139,8 @@ export default
       this.msg3 = '',
       this.msg4 = '',
       this.msg5 = '',
+      this.gifSrc = null,
+      this.randomizer = '',
       this.angrySound.pause()
       this.happySound.pause()
       this.sadSound.pause()
@@ -138,6 +162,8 @@ export default
       this.msg3 = '',
       this.msg4 = '',
       this.msg5 = '',
+      this.gifSrc = null,
+      this.randomizer = '',
       this.angrySound.pause()
       this.happySound.pause()
       this.sadSound.pause()
@@ -148,8 +174,22 @@ export default
     resetTimer: function () {
       clearTimeout(this.time)
       this.time = setTimeout(() => { this.refresh2() }, 5000)
-      console.log('reset timer')
-    }
+        console.log('reset timer')
+    },
+    getGif: function () {
+      var self = this
+      if (this.emotion != null) {
+        console.log('initializing')
+        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.emotion + Math.random() + this.randomizer + "&limit=" + 1 + "&rating=pg" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
+          .then(function (response) {
+            console.log(response)
+            self.gifSrc = response.data.data[0].images.original.url
+          })
+          .catch(function (error) {
+            console.log(error)
+          })
+        }
+      }
   }
 }
 </script>
@@ -167,6 +207,15 @@ export default
   border-bottom-right-radius: 5px;
   margin-top: -260px;
   margin-bottom: 25px;
+  z-index: 1;
+}
+#textWindow {
+}
+img {
+  height: 400px;
+  margin-bottom:  -700px;
+  border: black;
+  padding: 20px;
 }
 p {
   position: relative;
@@ -230,7 +279,6 @@ emotions {
   position: float;
   color: black;
   z-index: -1;
-  margin-top: 300px;
 }
 @keyframes angerPulse {
   from {-webkit-box-shadow: 0 0 9px #ff3f3f; }
