@@ -67,7 +67,7 @@ export default
         .then(function (response) {
           console.log(response)
           if (response.data.results.anger &&
-          response.data.results.anger >= 0.2) {
+          response.data.results.anger >= 0.4) {
             self.angry = '#ff3f3f'
             self.msg = ''
             self.msg1 = '$ that makes me feel angry'
@@ -75,6 +75,7 @@ export default
             self.getGif()
             angrySound.play()
             self.output = 1
+            setTimeout(() => { angrySound.pause() }, 5000)
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.joy &&
@@ -86,6 +87,7 @@ export default
             self.getGif()
             happySound.play()
             self.output = 1
+            setTimeout(() => { happySound.pause() }, 5000)
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.sadness &&
@@ -97,6 +99,7 @@ export default
             self.getGif()
             sadSound.play()
             self.output = 1
+            setTimeout(() => { sadSound.pause() }, 5000)
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.fear &&
@@ -108,6 +111,7 @@ export default
             self.getGif()
             fearfulSound.play()
             self.output = 1
+            setTimeout(() => { fearfulSound.pause() }, 5000)
             setTimeout(() => { self.refresh() }, 5000)
           }
           if (response.data.results.surprise &&
@@ -119,6 +123,7 @@ export default
             self.getGif()
             surprisedSound.play()
             self.output = 1
+            setTimeout(() => { surprisedSound.pause() }, 5000)
             setTimeout(() => { self.refresh() }, 5000)
           } if (self.output === 0) {
             self.msg = '$  I\'m sorry, i don\'t understand try saying it a different way'
@@ -141,11 +146,6 @@ export default
       this.msg5 = '',
       this.gifSrc = null,
       this.randomizer = '',
-      this.angrySound.pause()
-      this.happySound.pause()
-      this.sadSound.pause()
-      this.fearfulSound.pause()
-      this.surprisedSound.pause()
       console.log('refresh')
     },
     refresh2: function () {
@@ -164,11 +164,6 @@ export default
       this.msg5 = '',
       this.gifSrc = null,
       this.randomizer = '',
-      this.angrySound.pause()
-      this.happySound.pause()
-      this.sadSound.pause()
-      this.fearfulSound.pause()
-      this.surprisedSound.pause()
       this.console.log('refresh2')
     },
     resetTimer: function () {
