@@ -204,13 +204,12 @@ export default
   margin-bottom: 25px;
   z-index: 1;
 }
-#textWindow {
+#gif {
 }
 img {
   height: 400px;
-  margin-bottom:  -700px;
+  margin-bottom:  -775px;
   border: black;
-  padding: 20px;
 }
 p {
   position: relative;
