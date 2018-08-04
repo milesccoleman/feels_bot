@@ -8,12 +8,6 @@
     <form v-on:submit.prevent="getDataDoStuffWithData">
       <div id="output" class="fakeScreen"><p class="line1">{{msg}}{{msg1}}{{msg2}}{{msg3}}{{msg4}}{{msg5}}<span class="cursor1">_</span></p></div>
         <input id="textWindow" v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
-
-          <audio ref="colorSoundAngry"><source src='static/angrysound.mp3'></audio>
-          <audio ref="colorSoundHappy"><source src='static/happysound.mp3'></audio>
-          <audio ref="colorSoundSad"><source src='static/sadsound.mp3'></audio>
-          <audio ref="colorSoundFearful"><source src='static/fearfulsound.mp3'></audio>
-          <audio ref="colorSoundSurprised"><source src='static/surprisedsound.mp3'></audio>
     </form>
 
       <div class="emotion" id="sad" v-bind:style="{backgroundColor: sad}"></div><br><br>
@@ -75,8 +69,8 @@ export default
             self.getGif()
             angrySound.play()
             self.output = 1
-            setTimeout(() => { angrySound.pause() }, 5000)
-            setTimeout(() => { self.refresh() }, 5000)
+            setTimeout(() => { angrySound.pause() }, 9500)
+            setTimeout(() => { self.refresh() }, 10000)
           }
           if (response.data.results.joy &&
           response.data.results.joy >= 0.2) {
@@ -87,8 +81,8 @@ export default
             self.getGif()
             happySound.play()
             self.output = 1
-            setTimeout(() => { happySound.pause() }, 5000)
-            setTimeout(() => { self.refresh() }, 5000)
+            setTimeout(() => { happySound.pause() }, 9500)
+            setTimeout(() => { self.refresh() }, 10000)
           }
           if (response.data.results.sadness &&
           response.data.results.sadness >= 0.2) {
@@ -99,8 +93,8 @@ export default
             self.getGif()
             sadSound.play()
             self.output = 1
-            setTimeout(() => { sadSound.pause() }, 5000)
-            setTimeout(() => { self.refresh() }, 5000)
+            setTimeout(() => { sadSound.pause() }, 9500)
+            setTimeout(() => { self.refresh() }, 10000)
           }
           if (response.data.results.fear &&
           response.data.results.fear >= 0.2) {
@@ -111,8 +105,8 @@ export default
             self.getGif()
             fearfulSound.play()
             self.output = 1
-            setTimeout(() => { fearfulSound.pause() }, 5000)
-            setTimeout(() => { self.refresh() }, 5000)
+            setTimeout(() => { fearfulSound.pause() }, 9500)
+            setTimeout(() => { self.refresh() }, 10000)
           }
           if (response.data.results.surprise &&
           response.data.results.surprise >= 0.2) {
@@ -123,8 +117,8 @@ export default
             self.getGif()
             surprisedSound.play()
             self.output = 1
-            setTimeout(() => { surprisedSound.pause() }, 5000)
-            setTimeout(() => { self.refresh() }, 5000)
+            setTimeout(() => { surprisedSound.pause() }, 9500)
+            setTimeout(() => { self.refresh() }, 10000)
           } if (self.output === 0) {
             self.msg = '$  I\'m sorry, i don\'t understand try saying it a different way'
           }
@@ -147,6 +141,7 @@ export default
       this.gifSrc = null,
       this.randomizer = '',
       console.log('refresh')
+      setTimeout(() => { this.refresh2() }, 15000)
     },
     refresh2: function () {
       this.color = '',
@@ -168,7 +163,7 @@ export default
     },
     resetTimer: function () {
       clearTimeout(this.time)
-      this.time = setTimeout(() => { this.refresh2() }, 5000)
+      this.time = setTimeout(() => { this.refresh2() }, 10000)
         console.log('reset timer')
     },
     getGif: function () {
