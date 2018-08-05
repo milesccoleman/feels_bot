@@ -6,7 +6,14 @@
       <div class="emotion" id="happy" v-bind:style="{backgroundColor: happy}"></div><br><br><br><br>
 
     <form v-on:submit.prevent="getDataDoStuffWithData">
-      <div id="output" class="fakeScreen"><p class="line1">{{msg}}{{msg1}}{{msg2}}{{msg3}}{{msg4}}{{msg5}}<span class="cursor1">_</span></p></div>
+      <div id="output" class="fakeScreen"><p class="line1">$ {{msg}}
+        <span v-bind:style="{ 'color': angry }">{{msg1}}</span>
+        <span v-bind:style="{ 'color': happy }">{{msg2}}</span>
+        <span v-bind:style="{ 'color': sad }">{{msg3}}</span>
+        <span v-bind:style="{ 'color': fearful }">{{msg4}}</span>
+        <span v-bind:style="{ 'color': surprised }">{{msg5}}</span>
+        <span class="cursor1">_</span></p>
+      </div>
         <input id="textWindow" v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
     </form>
 
@@ -32,7 +39,7 @@ export default
       sad: '',
       fearful: '',
       surprised: '',
-      msg: '$  tell me anything you want, and i\'ll tell you how it makes me feel',
+      msg: 'tell me anything you want, and i\'ll tell you how it makes me feel',
       msg1: '',
       msg2: '',
       msg3: '',
@@ -63,8 +70,8 @@ export default
           if (response.data.results.anger &&
           response.data.results.anger >= 0.4) {
             self.angry = '#ff3f3f'
-            self.msg = ''
-            self.msg1 = '$ that makes me feel angry'
+            self.msg = 'that makes me feel '
+            self.msg1 = 'angry '
             self.randomizer = 'angry'
             self.getGif()
             angrySound.play()
@@ -75,8 +82,8 @@ export default
           if (response.data.results.joy &&
           response.data.results.joy >= 0.2) {
             self.happy = '#2bd1fc'
-            self.msg = ''
-            self.msg2 = '$  that makes me feel happy'
+            self.msg = 'that makes me feel '
+            self.msg2 = 'happy '
             self.randomizer = 'happy'
             self.getGif()
             happySound.play()
@@ -87,8 +94,8 @@ export default
           if (response.data.results.sadness &&
           response.data.results.sadness >= 0.2) {
             self.sad = '#c04df9'
-            self.msg = ''
-            self.msg3 = '$  that makes me feel sad'
+            self.msg = 'that makes me feel '
+            self.msg3 = 'sad '
             self.randomizer = 'sad'
             self.getGif()
             sadSound.play()
@@ -99,9 +106,9 @@ export default
           if (response.data.results.fear &&
           response.data.results.fear >= 0.2) {
             self.fearful = '#f3ea5f'
-            self.msg = ''
-            self.msg4 = '$  that makes me feel afraid'
-            self.randomizer = 'afraid'
+            self.msg = 'that makes me feel '
+            self.msg4 = 'afraid '
+            self.randomizer = ' afraid'
             self.getGif()
             fearfulSound.play()
             self.output = 1
@@ -111,8 +118,8 @@ export default
           if (response.data.results.surprise &&
           response.data.results.surprise >= 0.2) {
             self.surprised = '#42f459'
-            self.msg = ''
-            self.msg5 = '$  that makes me feel surprised'
+            self.msg = 'that makes me feel '
+            self.msg5 = 'surprised '
             self.randomizer = 'surprised'
             self.getGif()
             surprisedSound.play()
@@ -120,7 +127,7 @@ export default
             setTimeout(() => { surprisedSound.pause() }, 9500)
             setTimeout(() => { self.refresh() }, 10000)
           } if (self.output === 0) {
-            self.msg = '$  I\'m sorry, i don\'t understand try saying it a different way'
+            self.msg = 'I\'m sorry, i don\'t understand try saying it a different way'
           }
         })
     },
@@ -132,7 +139,7 @@ export default
       this.sad = '',
       this.fearful = '',
       this.surprised = '',
-      this.msg = '$  tell me something else. i like feelings'
+      this.msg = 'tell me something else. i like feelings'
       this.msg1 = '',
       this.msg2 = '',
       this.msg3 = '',
@@ -141,7 +148,7 @@ export default
       this.gifSrc = null,
       this.randomizer = '',
       console.log('refresh')
-      setTimeout(() => { this.refresh2() }, 15000)
+      setTimeout(() => { this.refresh2() }, 100000)
     },
     refresh2: function () {
       this.color = '',
@@ -151,7 +158,7 @@ export default
       this.sad = '',
       this.fearful = '',
       this.surprised = '',
-      this.msg = '$  tell me anything you want, and i\'ll tell you how it makes me feel',
+      this.msg = 'tell me anything you want, and i\'ll tell you how it makes me feel',
       this.msg1 = '',
       this.msg2 = '',
       this.msg3 = '',
@@ -163,7 +170,7 @@ export default
     },
     resetTimer: function () {
       clearTimeout(this.time)
-      this.time = setTimeout(() => { this.refresh2() }, 10000)
+      this.time = setTimeout(() => { this.refresh2() }, 45000)
         console.log('reset timer')
     },
     getGif: function () {
