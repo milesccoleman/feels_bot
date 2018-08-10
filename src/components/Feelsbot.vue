@@ -49,7 +49,6 @@ export default
       gif: [],
       gifSrc: null,
       output: 0,
-      radomizer: ''
     }
   },
   methods: {
@@ -72,7 +71,6 @@ export default
             self.angry = '#ff3f3f'
             self.msg = 'that makes me feel '
             self.msg1 = 'angry '
-            self.randomizer = 'angry'
             self.getGif()
             angrySound.play()
             self.output = 1
@@ -84,7 +82,6 @@ export default
             self.happy = '#2bd1fc'
             self.msg = 'that makes me feel '
             self.msg2 = 'happy '
-            self.randomizer = 'happy'
             self.getGif()
             happySound.play()
             self.output = 1
@@ -96,7 +93,6 @@ export default
             self.sad = '#c04df9'
             self.msg = 'that makes me feel '
             self.msg3 = 'sad '
-            self.randomizer = 'sad'
             self.getGif()
             sadSound.play()
             self.output = 1
@@ -104,11 +100,10 @@ export default
             setTimeout(() => { self.refresh() }, 10000)
           }
           if (response.data.results.fear &&
-          response.data.results.fear >= 0.2) {
+          response.data.results.fear >= 0.3) {
             self.fearful = '#f3ea5f'
             self.msg = 'that makes me feel '
             self.msg4 = 'afraid '
-            self.randomizer = ' afraid'
             self.getGif()
             fearfulSound.play()
             self.output = 1
@@ -120,7 +115,6 @@ export default
             self.surprised = '#42f459'
             self.msg = 'that makes me feel '
             self.msg5 = 'surprised '
-            self.randomizer = 'surprised'
             self.getGif()
             surprisedSound.play()
             self.output = 1
@@ -146,7 +140,6 @@ export default
       this.msg4 = '',
       this.msg5 = '',
       this.gifSrc = null,
-      this.randomizer = '',
       console.log('refresh')
       setTimeout(() => { this.refresh2() }, 100000)
     },
@@ -165,7 +158,6 @@ export default
       this.msg4 = '',
       this.msg5 = '',
       this.gifSrc = null,
-      this.randomizer = '',
       this.console.log('refresh2')
     },
     resetTimer: function () {
@@ -177,7 +169,7 @@ export default
       var self = this
       if (this.emotion != null) {
         console.log('initializing')
-        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + this.emotion + "&limit=" + 1 + "&rating=g" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
+        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.emotion + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + "&limit=" + 1 + "&rating=g" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
           .then(function (response) {
             console.log(response)
             self.gifSrc = response.data.data[0].images.original.url
