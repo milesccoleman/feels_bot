@@ -49,8 +49,8 @@ export default
       gif: [],
       gifSrc: null,
       output: 0,
-      guider: 'machine cyborg',
-      guider2: 'computer machine'
+      guider: 'robot',
+      guider2: 'machine cyborg'
     }
   },
   methods: {
