@@ -169,7 +169,7 @@ export default
       var self = this
       if (this.emotion != null) {
         console.log('initializing')
-        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.emotion + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + "&limit=" + 1 + "&rating=g" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
+        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.emotion + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + "&limit=" + 1 + "&rating=y" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
           .then(function (response) {
             console.log(response)
             self.gifSrc = response.data.data[0].images.original.url
