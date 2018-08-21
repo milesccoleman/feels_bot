@@ -1,7 +1,7 @@
 <template>
 
-  <div id="emotions" vbind:src>
-  <img v-if ='gifSrc != null' id="gif" v-bind:src="gifSrc"/>
+  <div id="emotions">
+  <img v-if='gifSrc != null' id="gif" v-bind:src="gifSrc"/>
       <div class="emotion" id="angry" v-bind:style="{backgroundColor: angry}"></div><br><br>
       <div class="emotion" id="happy" v-bind:style="{backgroundColor: happy}"></div><br><br><br><br>
 
@@ -20,15 +20,13 @@
       <div class="emotion" id="sad" v-bind:style="{backgroundColor: sad}"></div><br><br>
       <div class="emotion" id="fearful" v-bind:style="{backgroundColor: fearful}"></div><br><br>
       <div class="emotion" id="surprised" v-bind:style="{backgroundColor: surprised}"></div><br><br><br><br>
-
   </div>
 
 </template>
 
 <script>
 import axios from 'axios'
-export default
-{
+export default {
   name: 'Feelsbot',
   data () {
     return {
@@ -50,7 +48,8 @@ export default
       gifSrc: null,
       output: 0,
       guider: 'robot',
-      guider2: 'machine cyborg'
+      guider2: 'machine cyborg',
+      video: false
     }
   },
   methods: {
@@ -143,7 +142,6 @@ export default
       this.msg5 = '',
       this.gifSrc = null,
       console.log('refresh')
-      setTimeout(() => { this.refresh2() }, 100000)
     },
     refresh2: function () {
       this.color = '',
@@ -153,14 +151,14 @@ export default
       this.sad = '',
       this.fearful = '',
       this.surprised = '',
-      this.msg = 'tell me anything you want, and i\'ll tell you how it makes me feel',
+      this.msg = '',
       this.msg1 = '',
       this.msg2 = '',
       this.msg3 = '',
       this.msg4 = '',
       this.msg5 = '',
       this.gifSrc = null,
-      this.console.log('refresh2')
+      this.$router.push("/Video")
     },
     resetTimer: function () {
       clearTimeout(this.time)
