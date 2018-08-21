@@ -1,6 +1,6 @@
 <template>
   <div id="video">
-    <video v-if="video == true" width="100%" height="100%" controls autoplay src="static/feels_bot.mp4" type="video/mp4"></video>
+    <video v-if="video == true" width="100%" height="100%" autoplay loop src="static/feels_bot.mp4" type="video/mp4"></video>
     <img id="try" src="static/try.png" v-on:click="returnToBot"></img>
   </div>
 
@@ -32,11 +32,11 @@ html {
 }
 #try {
     position: absolute;
-    width:160px;
+    width:100px;
     min-height:40px;
     z-index:300000;
     top:10px;
-    right:10px;
+    left:10px;
     text-align:center;
 }
 #app {
