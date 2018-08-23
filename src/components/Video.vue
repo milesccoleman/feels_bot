@@ -1,7 +1,6 @@
 <template>
-  <div id="video">
+  <div id="video" v-on:click="returnToBot">
     <video v-if="video == true" width="100%" height="100%" autoplay loop src="static/feels_bot.mp4" type="video/mp4"></video>
-    <img id="try" src="static/try.png" v-on:click="returnToBot"></img>
   </div>
 
 </template>
@@ -14,7 +13,9 @@ export default {
     video: true
   }
 },
-
+  created: function () {
+    window.addEventListener('keyup', this.returnToBot)
+    },
   methods: {
   returnToBot: function () {
     this.$router.push("/")
