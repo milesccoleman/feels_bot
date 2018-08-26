@@ -52,6 +52,9 @@ export default {
       video: false
     }
   },
+  created: function () {
+    this.resetTimerAtStart()
+    },
   methods: {
     getDataDoStuffWithData: function () {
       var self = this
@@ -160,9 +163,14 @@ export default {
       this.gifSrc = null,
       this.$router.push("/Video")
     },
+    resetTimerAtStart: function () {
+      clearTimeout(this.time)
+      this.time = setTimeout(() => { this.refresh2() }, 30000)
+        console.log('reset timer')
+    },
     resetTimer: function () {
       clearTimeout(this.time)
-      this.time = setTimeout(() => { this.refresh2() }, 45000)
+      this.time = setTimeout(() => { this.refresh2() }, 30000)
         console.log('reset timer')
     },
     getGif: function () {
