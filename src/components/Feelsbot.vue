@@ -264,14 +264,12 @@ span {
   animation: blink 1s 2s 2 forwards;
   -webkit-animation-iteration-count: infinite;
 }
-html, body {
+html {
   margin: 0;
   padding: 0;
   background: black;
-  overflow: hidden;
-}
-#app, #emotions, #form {
-  overflow: hidden;
+  height: 90vh;
+  overflow: hidden !important;
 }
 @keyframes angerPulse {
   from {-webkit-box-shadow: 0 0 9px #ff3f3f; }
