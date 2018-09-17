@@ -264,7 +264,7 @@ span {
   animation: blink 1s 2s 2 forwards;
   -webkit-animation-iteration-count: infinite;
 }
-html {
+html, body {
   margin: 0;
   padding: 0;
   background: black;
