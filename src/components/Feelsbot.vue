@@ -270,12 +270,8 @@ html, body {
   background: black;
   overflow: hidden;
 }
-emotions {
-  height: 700px;
-  size: 500px;
-  position: float;
-  color: black;
-  z-index: -1;
+#emotions {
+  overflow: hidden;
 }
 @keyframes angerPulse {
   from {-webkit-box-shadow: 0 0 9px #ff3f3f; }
