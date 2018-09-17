@@ -13,6 +13,7 @@ export default {
 <style>
 html {
     background-color: black;
+    overflow: hidden;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -21,6 +22,5 @@ html {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-  overflow: hidden;
 }
 </style>
