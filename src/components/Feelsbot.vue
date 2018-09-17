@@ -270,7 +270,7 @@ html, body {
   background: black;
   overflow: hidden;
 }
-#emotions {
+#app, #emotions, #form {
   overflow: hidden;
 }
 @keyframes angerPulse {
