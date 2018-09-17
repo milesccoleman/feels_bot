@@ -268,6 +268,7 @@ html {
   margin: 0;
   padding: 0;
   background: black;
+  overflow: hidden;
 }
 emotions {
   height: 700px;
