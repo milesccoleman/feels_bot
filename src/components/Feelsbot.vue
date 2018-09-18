@@ -265,15 +265,15 @@ span {
   -webkit-animation-iteration-count: infinite;
 }
 html, body, #emotions {
-  margin: 0;
-  padding: 0;
   background: black;
-  overflow: hidden !important;
 }
 @keyframes angerPulse {
   from {-webkit-box-shadow: 0 0 9px #ff3f3f; }
   50% {-webkit-box-shadow: 0 0 36px #ff3f3f; }
   to {-webkit-box-shadow: 0 0 9px #ff3f3f; }
+}
+#emotions {
+  margin-top: -25px;
 }
 #angry {
   height: 125px;
@@ -281,6 +281,7 @@ html, body, #emotions {
   -webkit-animation-name: angerPulse;
   -webkit-animation-duration: 3s;
   -webkit-animation-iteration-count: infinite;
+  margin-top: 15px;
   }
 @keyframes happyPulse {
   from {-webkit-box-shadow: 0 0 9px #2bd1fc; }
@@ -339,7 +340,6 @@ input {
   z-index: 1;
 }
 form {
-  margin-top: -115px;
 }
 input[type="color"] {
   width: 40px;
