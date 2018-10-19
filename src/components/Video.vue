@@ -27,7 +27,6 @@ export default {
 <style>
 html {
     background-color: black;
-    overflow: hidden;
 }
 #video {
   z-index: -1;
