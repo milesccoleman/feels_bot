@@ -13,7 +13,6 @@ export default {
 <style>
 html {
     background-color: black;
-    overflow: hidden;
 }
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
