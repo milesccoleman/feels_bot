@@ -64,7 +64,7 @@ export default {
       var fearfulSound = new Audio('static/fearfulsound.mp3')
       var surprisedSound = new Audio('static/surprisedsound.mp3')
       axios.post('https://apiv2.indico.io/emotion/', JSON.stringify({
-        'api_key': '74327046b0f275d734b4089b24ec6792',
+        'api_key': '1acb88b1c44ad527a6ca0d66906cc847',
         'data': self.emotion,
         'threshold': 0.1
       }))
