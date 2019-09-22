@@ -186,9 +186,7 @@ export default {
             console.log(response)
             self.gifSrc = response.data.data[0].images.original.url
           })
-         	.catch((error) => {
-		      console.log(error);
-          })
+
         }
       }
   }
