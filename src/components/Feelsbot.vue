@@ -14,7 +14,7 @@
         <span v-bind:style="{ 'color': surprised }">{{msg5}}</span>
         <span class="cursor1">_</span></p>
       </div>
-        <input id="textWindow" v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotion" placeholder="tell me something"/>
+        <input id="textWindow" v-on:keyup="resetTimer" type="text" v-bind:style="{color: color}" v-model="emotionInput" placeholder="tell me something"/>
     </form>
 
       <div class="emotion" id="sad" v-bind:style="{backgroundColor: sad}"></div><br><br>
@@ -25,13 +25,14 @@
 </template>
 
 <script>
+import paralleldots from 'paralleldots'
 import axios from 'axios'
 export default {
   name: 'Feelsbot',
   data () {
     return {
       color: '',
-      emotion: '',
+      emotionInput: '',
       angry: '',
       happy: '',
       sad: '',
@@ -63,16 +64,18 @@ export default {
       var sadSound = new Audio('static/sadsound.mp3')
       var fearfulSound = new Audio('static/fearfulsound.mp3')
       var surprisedSound = new Audio('static/surprisedsound.mp3')
-      var header = 'headers:{crossorigin:true}'
-      axios.post('https://apiv2.indico.io/emotion/', header, JSON.stringify({
-        'api_key': 'fea6c7622b3e5c29c6c9b458fd514009',
-        'data': self.emotion,
-        'threshold': 0.1
-      }))
-        .then(function (response) {
-          console.log(response)
-          if (response.data.results.anger &&
-          response.data.results.anger >= 0.4) {
+      const pd = require('paralleldots');
+
+//emotion analysis
+      pd.apiKey = "y6tN74zDv4crVkQDcalJQAqSUn106IN7q8zEGK9lXbs";
+
+      pd.emotion(self.emotionInput,"en")
+	      .then((response) => {
+		    console.log(response);
+		    let obj = JSON.parse(response)
+
+          if (obj.emotion.Angry &&
+          obj.emotion.Angry >= 0.4) {
             self.angry = '#ff3f3f'
             self.msg = 'that makes me feel '
             self.msg1 = 'angry '
@@ -82,8 +85,8 @@ export default {
             setTimeout(() => { angrySound.pause() }, 9500)
             setTimeout(() => { self.refresh() }, 10000)
           }
-          if (response.data.results.joy &&
-          response.data.results.joy >= 0.2) {
+          if (obj.emotion.Happy &&
+          obj.emotion.Happy >= 0.2) {
             self.happy = '#2bd1fc'
             self.msg = 'that makes me feel '
             self.msg2 = 'happy '
@@ -93,8 +96,8 @@ export default {
             setTimeout(() => { happySound.pause() }, 9500)
             setTimeout(() => { self.refresh() }, 10000)
           }
-          if (response.data.results.sadness &&
-          response.data.results.sadness >= 0.2) {
+          if (obj.emotion.Sad &&
+          obj.emotion.Sad >= 0.2) {
             self.sad = '#c04df9'
             self.msg = 'that makes me feel '
             self.msg3 = 'sad '
@@ -104,8 +107,8 @@ export default {
             setTimeout(() => { sadSound.pause() }, 9500)
             setTimeout(() => { self.refresh() }, 10000)
           }
-          if (response.data.results.fear &&
-          response.data.results.fear >= 0.3) {
+          if (obj.emotion.Fear &&
+          obj.emotion.Fear >= 0.3) {
             self.fearful = '#f3ea5f'
             self.msg = 'that makes me feel '
             self.msg4 = 'afraid '
@@ -115,11 +118,11 @@ export default {
             setTimeout(() => { fearfulSound.pause() }, 9500)
             setTimeout(() => { self.refresh() }, 10000)
           }
-          if (response.data.results.surprise &&
-          response.data.results.surprise >= 0.2) {
+          if (obj.emotion.Excited &&
+          obj.emotion.Excited >= 0.2) {
             self.surprised = '#42f459'
             self.msg = 'that makes me feel '
-            self.msg5 = 'surprised '
+            self.msg5 = 'excited '
             self.getGif()
             surprisedSound.play()
             self.output = 1
@@ -176,15 +179,15 @@ export default {
     },
     getGif: function () {
       var self = this
-      if (this.emotion != null) {
+      if (this.emotionInput != null) {
         console.log('initializing')
-        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.emotion + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + this.guider2 + this.guider + "&limit=" + 1 + "&rating=g" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
+        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.emotionInput + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + "&limit=" + 1 + "&rating=pg" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
           .then(function (response) {
             console.log(response)
             self.gifSrc = response.data.data[0].images.original.url
           })
-          .catch(function (error) {
-            console.log(error)
+         	.catch((error) => {
+		      console.log(error);
           })
         }
       }
