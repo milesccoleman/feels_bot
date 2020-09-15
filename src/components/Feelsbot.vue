@@ -181,7 +181,7 @@ export default {
       var self = this
       if (this.emotionInput != null) {
         console.log('initializing')
-        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + this.emotionInput + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + "&limit=" + 1 + "&rating=pg" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
+        axios.get("https://api.giphy.com/v1/gifs/search?" + "q=" + "robot" + this.msg1 + this.msg2 + this.msg3 + this.msg4 + this.msg5 + "&limit=" + 1 + "&rating=pg" + "&api_key=MOMrgmevbH8gqLMUijBDYM0tCxWQxO8Z")
           .then(function (response) {
             console.log(response)
             self.gifSrc = response.data.data[0].images.original.url
