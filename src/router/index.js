@@ -6,9 +6,10 @@ import Video from '@/components/Video'
 Vue.use(Router)
 
 export default new Router({
+  mode: 'hash',
   routes: [
     {
-      path: '/Feelsbot',
+      path: '/',
       name: 'Feelsbot',
       component: Feelsbot
     },
