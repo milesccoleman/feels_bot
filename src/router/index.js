@@ -8,7 +8,7 @@ Vue.use(Router)
 export default new Router({
   routes: [
     {
-      path: 'milesccoleman.com/',
+      path: '/Feelsbot',
       name: 'Feelsbot',
       component: Feelsbot
     },
