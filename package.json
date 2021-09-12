@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "express": "^4.17.1",
     "paralleldots": "^3.2.4",
     "vue": "^2.5.2",
