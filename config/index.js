@@ -8,7 +8,6 @@ module.exports = {
   dev: {
 
     // Paths
-    publicPath: '/feels_bot/',
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {},
