@@ -67,7 +67,7 @@ export default {
       const pd = require('paralleldots');
 
 //emotion analysis
-      pd.apiKey = "y6tN74zDv4crVkQDcalJQAqSUn106IN7q8zEGK9lXbs";
+      pd.apiKey = "hL7rOIhghKLZtrI6w04cFjxVvAOHQ7BiNhjMLAVnMPw";
 
       pd.emotion(self.emotionInput,"en")
 	      .then((response) => {
